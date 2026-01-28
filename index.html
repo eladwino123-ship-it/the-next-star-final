@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Next Star - Live Control</title>
     
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/eladwino123-ship-it/the-next-star-final/main/logo.png">
+    <link rel="icon" type="image/png" href="logo.png">
 
     <style>
         body, html {
@@ -20,26 +20,22 @@
         .arrow-container {
             height: 75vh; width: auto; display: none;
             z-index: 10; position: relative;
-            filter: drop-shadow(0 0 30px currentColor);
+            /* הילה קבועה ללא פעימה */
+            filter: drop-shadow(0 0 35px currentColor);
         }
 
         .blue-glow { color: #0099ff; }
         .red-glow { color: #ff0000; }
 
-        /* אפקט הפלש והפעימה של התוכנית */
+        /* חץ מופיע בצורה חלקה ונעצר */
         .visible { 
             display: block; 
-            animation: startFlash 0.2s ease-out, pulseGlow 1.5s infinite ease-in-out 0.2s; 
+            animation: fadeIn 0.15s ease-out; 
         }
 
-        @keyframes startFlash {
-            0% { opacity: 0; transform: scale(0.8); filter: drop-shadow(0 0 100px currentColor) brightness(3); }
-            100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 40px currentColor) brightness(1); }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { filter: drop-shadow(0 0 30px currentColor) brightness(1); transform: scale(1); }
-            50% { filter: drop-shadow(0 0 60px currentColor) brightness(1.2); transform: scale(1.02); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
     </style>
 </head>
@@ -67,7 +63,7 @@
     </svg>
 
     <script>
-        // מנוע נצנצים שוחים
+        // מנוע נצנצים שוחים (נשאר כרקע חי)
         const canvas = document.getElementById('glitterCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -81,8 +77,8 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.size = Math.random() * 3 + 1;
-                this.vx = (Math.random() - 0.5) * 1.8;
-                this.vy = (Math.random() - 0.5) * 1.8;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5;
                 this.opacity = Math.random();
                 this.color = ['#ffffff', '#ffd700', '#00aaff'][Math.floor(Math.random() * 3)];
             }
